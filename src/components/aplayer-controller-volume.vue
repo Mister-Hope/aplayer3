@@ -21,9 +21,9 @@
 
 <script>
 import IconButton from "./aplayer-iconbutton.vue";
-import { getElementViewTop } from "../utils";
+import { getElementViewTop } from "../utils.js";
 
-const barHeight = 40;
+const BAR_HEIGHT = 40;
 
 export default {
   components: {
@@ -40,7 +40,8 @@ export default {
   methods: {
     adjustVolume(e) {
       let percentage =
-        (barHeight - e.clientY + getElementViewTop(this.$refs.bar)) / barHeight;
+        (BAR_HEIGHT - e.clientY + getElementViewTop(this.$refs.bar)) /
+        BAR_HEIGHT;
       percentage = percentage > 0 ? percentage : 0;
       percentage = percentage < 1 ? percentage : 1;
       this.$emit("setvolume", percentage);
@@ -51,7 +52,8 @@ export default {
     },
     onDocumentMouseMove(e) {
       let percentage =
-        (barHeight - e.clientY + getElementViewTop(this.$refs.bar)) / barHeight;
+        (BAR_HEIGHT - e.clientY + getElementViewTop(this.$refs.bar)) /
+        BAR_HEIGHT;
       percentage = percentage > 0 ? percentage : 0;
       percentage = percentage < 1 ? percentage : 1;
       this.$emit("setvolume", percentage);
@@ -61,7 +63,8 @@ export default {
       document.removeEventListener("mousemove", this.onDocumentMouseMove);
 
       let percentage =
-        (barHeight - e.clientY + getElementViewTop(this.$refs.bar)) / barHeight;
+        (BAR_HEIGHT - e.clientY + getElementViewTop(this.$refs.bar)) /
+        BAR_HEIGHT;
       percentage = percentage > 0 ? percentage : 0;
       percentage = percentage < 1 ? percentage : 1;
       this.$emit("setvolume", percentage);
