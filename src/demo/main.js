@@ -2,15 +2,13 @@
  * Created by Doma on 2016/11/22.
  */
 
-import { createApp } from 'vue'
+import { createApp } from "vue";
 
+import VueAPlayer from "../vue-aplayer.vue";
 
-import VueAPlayer from '../vue-aplayer.vue'
+import App from "./App.vue";
 
-import App from './App.vue'
-
-
-const app = createApp(App)
-app.config.devtools = true
-app.use(VueAPlayer)
-app.mount('#app')
+const app = createApp(App);
+app.config.devtools = true;
+app.use(VueAPlayer);
+app.mount("#app");
