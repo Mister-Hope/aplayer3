@@ -3,7 +3,7 @@
  * @see https://github.com/MoePlayer/APlayer/blob/master/src/js/lrc.js#L83
  * @author DIYgod(https://github.com/DIYgod)
  *
- * @param {String} lrc_s - Format:
+ * @param {String} lrcString - Format:
  * [mm:ss]lyric
  * [mm:ss.xx]lyric
  * [mm:ss.xxx]lyric
@@ -12,11 +12,11 @@
  *
  * @return {String} [[time, text], [time, text], [time, text], ...]
  */
-export function parseLrc(lrc_s) {
-  if (lrc_s) {
-    lrc_s = lrc_s.replace(/([^\]^\n])\[/g, (match, p1) => p1 + "\n[");
-    const lyric = lrc_s.split("\n");
-    const lrc = [];
+export const parseLrc = (lrcString: string): [time: string, text: string][] => {
+  if (lrcString) {
+    lrcString = lrcString.replace(/([^\]^\n])\[/g, (_, p1) => p1 + "\n[");
+    const lyric = lrcString.split("\n");
+    const lrc: [time: string, text: string][] = [];
     const lyricLen = lyric.length;
     for (let i = 0; i < lyricLen; i++) {
       // match lrc time
@@ -49,7 +49,7 @@ export function parseLrc(lrc_s) {
   } else {
     return [];
   }
-}
+};
 
 /**
  * Compare two semantic versions(major.minor.patch)
@@ -77,12 +77,6 @@ export function versionCompare(semantic1, semantic2) {
 
 export function warn(message) {
   return console.warn(`[Vue-APlayer] ${message}`);
-}
-
-export function deprecatedProp(name, sinceVersion, alternative) {
-  return warn(
-    `'${name}' is deprecated since v${sinceVersion}, and will be removed in future releases, use '${alternative}' instead`
-  );
 }
 
 export function getElementViewLeft(element) {

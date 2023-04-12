@@ -70,7 +70,7 @@
     />
   </div>
 </template>
-<script>
+<script lang="ts">
 import Thumbnail from "./components/aplayer-thumbnail.vue";
 import MusicList from "./components/aplayer-list.vue";
 import Controls from "./components/aplayer-controller.vue";
@@ -86,14 +86,14 @@ const picThemeCache = {};
 // mutex playing instance
 let activeMutex = null;
 
-const REPEAT = {
-  NONE: "none",
-  MUSIC: "music",
-  LIST: "list",
-  NO_REPEAT: "no-repeat",
-  REPEAT_ONE: "repeat-one",
-  REPEAT_ALL: "repeat-all",
-};
+const enum REPEAT {
+  NONE = "none",
+  MUSIC = "music",
+  LIST = "list",
+  NO_REPEAT = "no-repeat",
+  REPEAT_ONE = "repeat-one",
+  REPEAT_ALL = "repeat-all",
+}
 
 const VueAPlayer = {
   name: "APlayer",
@@ -114,18 +114,11 @@ const VueAPlayer = {
     },
     list: {
       type: Array,
-      default() {
-        return [];
-      },
+      default: () => [],
     },
-    mini: {
-      type: Boolean,
-      default: false,
-    },
-    showLrc: {
-      type: Boolean,
-      default: false,
-    },
+    mini: Boolean,
+    showLrc: Boolean,
+
     mutex: {
       type: Boolean,
       default: true,
@@ -137,21 +130,14 @@ const VueAPlayer = {
 
     listMaxHeight: String,
     /**
-     * @since 1.4.1
      * Fold playlist initially
      */
-    listFolded: {
-      type: Boolean,
-      default: false,
-    },
+    listFolded: Boolean,
 
     /**
-     * @since 1.2.0 Float mode
+     * Float mode
      */
-    float: {
-      type: Boolean,
-      default: false,
-    },
+    float: Boolean,
 
     // Audio attributes as props
     // since 1.4.0
@@ -162,10 +148,7 @@ const VueAPlayer = {
      * @since 1.4.0
      * not observable
      */
-    autoplay: {
-      type: Boolean,
-      default: false,
-    },
+    autoplay: Boolean,
 
     /**
      * @since 1.4.0
@@ -174,19 +157,14 @@ const VueAPlayer = {
      *
      * observable
      */
-    controls: {
-      type: Boolean,
-      default: false,
-    },
+    controls: Boolean,
 
     /**
      * @since 1.4.0
      * observable, sync
      */
-    muted: {
-      type: Boolean,
-      default: false,
-    },
+    muted: Boolean,
+
     /**
      * @since 1.4.0
      * observable
@@ -209,16 +187,12 @@ const VueAPlayer = {
     // since 1.5.0
 
     /**
-     * @since 1.5.0
      * @see https://support.apple.com/en-us/HT207230
      * twoWay
      */
-    shuffle: {
-      type: Boolean,
-      default: false,
-    },
+    shuffle: Boolean,
+
     /**
-     * @since 1.5.0
      * @see https://support.apple.com/en-us/HT207230
      * twoWay
      */

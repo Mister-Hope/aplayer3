@@ -1,12 +1,12 @@
 <template>
   <div class="aplayer-controller">
-    <v-progress
+    <ProgressBar
+      :theme="theme"
       :loadProgress="loadProgress"
       :playProgress="playProgress"
-      :theme="theme"
-      @dragbegin="(val) => $emit('dragbegin', val)"
-      @dragend="(val) => $emit('dragend', val)"
-      @dragging="(val) => $emit('dragging', val)"
+      @drag-begin="(progress) => $emit('dragbegin', progress)"
+      @dragging="(progress) => $emit('dragging', progress)"
+      @drag-end="(progress) => $emit('dragend', progress)"
     />
     <div class="aplayer-time">
       <div class="aplayer-time-inner">
@@ -46,7 +46,7 @@
 
 <script>
 import IconButton from "./aplayer-iconbutton.vue";
-import VProgress from "./aplayer-controller-progress.vue";
+import ProgressBar from "./ProgressBar.vue";
 import Volume from "./aplayer-controller-volume.vue";
 
 export default {
